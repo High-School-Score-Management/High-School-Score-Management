@@ -166,10 +166,10 @@
                     <td><%=rsStudent.getString("phone_number")%></td>
                     <td><%=rsStudent.getString("name")%></td>
                     <td><%=rsStudent.getDate("birthday")%></td>
-                    <td> <input type="number" min="0" max="10" name="<%=student_id +" scoreMouth"%>" value="<%=rsStudent.getFloat("scoreMouth")%>"> </td>
-                    <td> <input type="number" min="0" max="10" name="<%=student_id +" scoreShortExam"%>" value="<%=rsStudent.getFloat("scoreShortExam")%>"> </td>                            
-                    <td> <input type="number" min="0" max="10" name="<%=student_id +" scoreMidSemester"%>" value="<%=rsStudent.getFloat("scoreMidSemester")%>"> </td>                            
-                    <td> <input type="number" min="0" max="10" name="<%=student_id +" scoreSemester"%>" value="<%=rsStudent.getFloat("scoreSemester")%>"> </td>
+                    <td> <input type="number" min="0" max="10" step="0.1" name="<%=student_id +" scoreMouth"%>" value="<%=rsStudent.getString("scoreMouth") != null? rsStudent.getFloat("scoreMouth"): ""%>" > </td>
+                    <td> <input type="number" min="0" max="10" step="0.1" name="<%=student_id +" scoreShortExam"%>" value="<%=rsStudent.getString("scoreShortExam") != null? rsStudent.getFloat("scoreShortExam"): ""%>"> </td>                            
+                    <td> <input type="number" min="0" max="10" step="0.1" name="<%=student_id +" scoreMidSemester"%>" value="<%=rsStudent.getString("scoreMidSemester") != null? rsStudent.getFloat("scoreMidSemester"): ""%>"> </td>                            
+                    <td> <input type="number" min="0" max="10" step="0.1" name="<%=student_id +" scoreSemester"%>" value="<%=rsStudent.getString("scoreSemester") != null? rsStudent.getFloat("scoreSemester"): ""%>"> </td>
                 </tr>
                 <%
                     }

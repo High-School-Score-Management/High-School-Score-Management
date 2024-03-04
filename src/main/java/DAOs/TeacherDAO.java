@@ -167,13 +167,29 @@ public class TeacherDAO {
         return rs != null? rs: null;
     }
     
-    public void updateScoreById(int student_id, float scoreMouth, float scoreShortExam, float scoreMidSemester, float scoreSemester){
+    public void updateScoreById(int student_id, String scoreMouth, String scoreShortExam, String scoreMidSemester, String scoreSemester){
         try {
             PreparedStatement ps = conn.prepareStatement("update score set scoreMouth=?, scoreShortExam=?, scoreMidSemester=?, scoreSemester=? where student_id=?");
-            ps.setFloat(1, scoreMouth);
-            ps.setFloat(2, scoreShortExam);            
-            ps.setFloat(3, scoreMidSemester);            
-            ps.setFloat(4, scoreSemester);
+            if(scoreMouth.equals(""))
+                ps.setNull(1, java.sql.Types.FLOAT);
+            else
+                ps.setFloat(1, Float.parseFloat(scoreMouth));
+            
+            if(scoreShortExam.equals(""))
+                ps.setNull(2, java.sql.Types.FLOAT);
+            else
+                ps.setFloat(2, Float.parseFloat(scoreShortExam));
+            
+            if(scoreMidSemester.equals(""))
+                ps.setNull(3, java.sql.Types.FLOAT);
+            else
+                ps.setFloat(3, Float.parseFloat(scoreMidSemester));
+            
+            if(scoreSemester.equals(""))
+                ps.setNull(4, java.sql.Types.FLOAT);
+            else
+                ps.setFloat(4, Float.parseFloat(scoreSemester));       
+            
             ps.setFloat(5, student_id);
             
             ps.executeUpdate();
