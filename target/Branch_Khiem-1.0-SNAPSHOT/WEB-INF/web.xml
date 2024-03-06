@@ -4,9 +4,17 @@
         <servlet-name>AddScore</servlet-name>
         <servlet-class>Controller.AddScore</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Edit_Profile_Student</servlet-name>
+        <servlet-class>Controller.Edit_Profile_Student</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>AddScore</servlet-name>
-        <url-pattern>/AddScore</url-pattern>
+        <url-pattern>/AddScore/*</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Edit_Profile_Student</servlet-name>
+        <url-pattern>/edit_profiles</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

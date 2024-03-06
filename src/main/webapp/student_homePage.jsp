@@ -46,7 +46,7 @@
                     <img
                         class="navbar-brand"
                         id="logo"
-                        src="imgs/logo_small.jpg"
+                        src="<%= request.getContextPath()%>/imgs/logo_small.jpg"
                         alt="Hame Logo"
                         style="width: 60px; border-radius: 15%"
                         />
@@ -79,17 +79,17 @@
                                 >
                                 <ul class="dropdown-menu">
                                     <li>
-                                        <a class="dropdown-item" href="/HandmadeStore/AccountAdmin"
+                                        <a class="dropdown-item" href=""
                                            >My account</a
                                         >
                                     </li>
                                     <li>
-                                        <a class="dropdown-item" href="/HandmadeStore/SignOutAdmin"
+                                        <a class="dropdown-item" href=""
                                            >Change Password</a
                                         >
                                     </li>
                                     <li>
-                                        <a class="dropdown-item" href="/HandmadeStore/SignOutAdmin"
+                                        <a class="dropdown-item" href="/StudentManagement/StudentSignOut"
                                            >Sign out</a
                                         >
                                     </li>
@@ -112,10 +112,10 @@
                     <!-- The slideshow/carousel -->
                     <div class="carousel-inner">
                         <div class="carousel-item active">
-                            <img src="imgs/Black School Art Club Poster - Made with PosterMyWall.jpg" class="d-block w-100" id="slide" alt="Slide 1">
+                            <img src="<%= request.getContextPath()%>/imgs/Black School Art Club Poster - Made with PosterMyWall.jpg" class="d-block w-100" id="slide" alt="Slide 1">
                         </div>
                         <div class="carousel-item">
-                            <img src="imgs/a6401272ad0ecf54fdec283f4d338c7c.gif" class="d-block w-100" id="slide" alt="Slide 2">
+                            <img src="<%= request.getContextPath()%>/imgs/a6401272ad0ecf54fdec283f4d338c7c.gif" class="d-block w-100" id="slide" alt="Slide 2">
                         </div>
                     </div>
 
@@ -132,14 +132,14 @@
 
         <main class="container">
             <div class="row mt-5">
-                <div class="col-sm-12 col-md-6 text-center">
-                    <img src="imgs/icons8-pass-fail-80.png" width="200px" >
+                <a href="" style="text-decoration: none" class="col-sm-12 col-md-6 text-center">
+                    <img src="<%= request.getContextPath()%>/imgs/icons8-pass-fail-80.png" width="200px" >
                     <p class="text-light">Study Result</p>
-                </div>
-                <div class="col-sm-12 col-md-6 text-center">
-                    <img src="imgs/icons8-report-card-80.png" width="200px" >
+                </a>
+                <a href="" style="text-decoration: none" class="col-sm-12 col-md-6 text-center">
+                    <img src="<%= request.getContextPath()%>/imgs/icons8-report-card-80.png" width="200px" >
                     <p class="text-light">Report</p>
-                </div>
+                </a>
             </div>
         </main>
         

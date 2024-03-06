@@ -14,11 +14,13 @@ import java.sql.SQLException;
  */
 public class DBConnection {
 
-    public static Connection connect() throws ClassNotFoundException, SQLException {
-        //Khai bao driver
+   public static Connection connect() throws ClassNotFoundException, SQLException {
         Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
         //Tao doi tuong Connection
-        Connection conn = DriverManager.getConnection("jdbc:sqlserver://DESKTOP-Q4M8SRR\\SQLEXPRESS:1433;databaseName=High_School_Scores_Management2;user=sa2;password=khiem005101;encrypt=true;trustServerCertificate=true;");
+        Connection conn = DriverManager.getConnection("jdbc:sqlserver://OUTIS\\SQLEXPRESS:1433;databaseName=High_School_Scores_Management2;user=sa;password=0909577456az@;encrypt=true;trustServerCertificate=true;");
         return conn;
     }
+
+  
+
 }

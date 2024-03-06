@@ -11,12 +11,13 @@ import java.sql.Date;
  * @author Admin
  */
 public class student {
+
     private int id;
     private String email;
     private String password;
     private String name;
     private String gender;
-    private Date birthday;
+    private String birthday;
     private String phone_number;
     private String address;
     private String status;
@@ -26,6 +27,18 @@ public class student {
      */
     public int getId() {
         return id;
+    }
+
+    public student(int id, String email, String password, String name, String gender, String birthday, String phone_number, String address, String status) {
+        this.id = id;
+        this.email = email;
+        this.password = password;
+        this.name = name;
+        this.gender = gender;
+        this.birthday = birthday;
+        this.phone_number = phone_number;
+        this.address = address;
+        this.status = status;
     }
 
     /**
@@ -94,14 +107,14 @@ public class student {
     /**
      * @return the birthday
      */
-    public Date getBirthday() {
+    public String getBirthday() {
         return birthday;
     }
 
     /**
      * @param birthday the birthday to set
      */
-    public void setBirthday(Date birthday) {
+    public void setBirthday(String birthday) {
         this.birthday = birthday;
     }
 
@@ -146,4 +159,22 @@ public class student {
     public void setStatus(String status) {
         this.status = status;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("student{");
+        sb.append("id=").append(id);
+        sb.append(", email=").append(email);
+        sb.append(", password=").append(password);
+        sb.append(", name=").append(name);
+        sb.append(", gender=").append(gender);
+        sb.append(", birthday=").append(birthday);
+        sb.append(", phone_number=").append(phone_number);
+        sb.append(", address=").append(address);
+        sb.append(", status=").append(status);
+        sb.append('}');
+        return sb.toString();
+    }
+
 }

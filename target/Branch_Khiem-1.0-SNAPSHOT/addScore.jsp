@@ -154,6 +154,8 @@
                     <th>Mark Short Exam</th>                            
                     <th>Mark Mid Semester</th>
                     <th>Mark Semester</th>
+                    <th>Mark GPA</th>
+
                 </tr>
             </thead>
 
@@ -161,15 +163,18 @@
                 <%
                     while (rsStudent.next()) {
                         int student_id = rsStudent.getInt("student_id");
+                        float gpa = (rsStudent.getFloat("scoreMouth") + rsStudent.getFloat("scoreShortExam") + 
+                                    rsStudent.getFloat("scoreMidSemester") * 2 + rsStudent.getFloat("scoreSemester")*3) / 7;
                 %>
                 <tr>
                     <td><%=rsStudent.getString("phone_number")%></td>
                     <td><%=rsStudent.getString("name")%></td>
                     <td><%=rsStudent.getDate("birthday")%></td>
-                    <td> <input type="number" min="0" max="10" name="<%=student_id +" scoreMouth"%>" value="<%=rsStudent.getFloat("scoreMouth")%>"> </td>
-                    <td> <input type="number" min="0" max="10" name="<%=student_id +" scoreShortExam"%>" value="<%=rsStudent.getFloat("scoreShortExam")%>"> </td>                            
-                    <td> <input type="number" min="0" max="10" name="<%=student_id +" scoreMidSemester"%>" value="<%=rsStudent.getFloat("scoreMidSemester")%>"> </td>                            
-                    <td> <input type="number" min="0" max="10" name="<%=student_id +" scoreSemester"%>" value="<%=rsStudent.getFloat("scoreSemester")%>"> </td>
+                    <td> <input type="number" min="0" max="10" step="0.1" name="<%=student_id +" scoreMouth"%>" value="<%=rsStudent.getString("scoreMouth") != null? rsStudent.getFloat("scoreMouth"): ""%>" > </td>
+                    <td> <input type="number" min="0" max="10" step="0.1" name="<%=student_id +" scoreShortExam"%>" value="<%=rsStudent.getString("scoreShortExam") != null? rsStudent.getFloat("scoreShortExam"): ""%>"> </td>                            
+                    <td> <input type="number" min="0" max="10" step="0.1" name="<%=student_id +" scoreMidSemester"%>" value="<%=rsStudent.getString("scoreMidSemester") != null? rsStudent.getFloat("scoreMidSemester"): ""%>"> </td>                            
+                    <td> <input type="number" min="0" max="10" step="0.1" name="<%=student_id +" scoreSemester"%>" value="<%=rsStudent.getString("scoreSemester") != null? rsStudent.getFloat("scoreSemester"): ""%>"> </td>
+                    <td> <input type="number" name="<%=student_id +" gpa"%>" value="<%=(float)(Math.round(gpa*10))/10%>" readonly=""> </td>
                 </tr>
                 <%
                     }

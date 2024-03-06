@@ -70,6 +70,45 @@ public class AddScore extends HttpServlet {
         if (path.endsWith("AddScore")) {
             session.setAttribute("isAccess", "true");
             request.getRequestDispatcher("/addScore.jsp").forward(request, response);
+        } else if (path.endsWith("reportScore")) {
+//            gia cookie
+            Cookie cookie = new Cookie("teacher", "0942368977");
+            cookie.setMaxAge(60 * 5);
+            response.addCookie(cookie);
+//            
+            Cookie[] cList = request.getCookies();
+            String phoneNumber = "";
+            for (Cookie c : cList) {
+                if (c.getName().equals("teacher")) {
+                    phoneNumber = c.getValue();
+                    break;
+                }
+            }
+
+            if (!phoneNumber.equals("")) {
+                TeacherDAO tDAO = new TeacherDAO();
+                ResultSet rs = tDAO.getHomeroomByPhoneNumber(phoneNumber);
+                String classes = "";
+                String homeroom = "";
+
+                try {
+                    while (rs.next()) {
+                        classes = rs.getString("class_id");
+                        homeroom = rs.getString("homeroom");
+                    }
+                } catch (SQLException ex) {
+                    Logger.getLogger(AddScore.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                
+                if (!classes.equals("")) {
+                    session.setAttribute("homeroom", classes + " " + homeroom);
+                } else {
+                    session.setAttribute("homeroom", "false");
+                }
+            } else {
+                session.setAttribute("homeroom", "false");
+            }
+
         }
 
     }
@@ -105,39 +144,53 @@ public class AddScore extends HttpServlet {
                 }
             }
 
-            int id = tDAO.getTeacherByPhoneNumber(phoneNumber);
-            boolean checkTeacher = tDAO.getTeacherByClassAndSubject(classes, subject, id);
             List<String> list = new ArrayList<>();
             list.add(classes);
             list.add(subject + "");
             list.add(semester);
             session.setAttribute("list", list);
-            if (checkTeacher) {
-                session.setAttribute("isPower", id + "");
 
+            int id = tDAO.getTeacherByPhoneNumber(phoneNumber);
+            if (id > 0) {
+                boolean checkTeacher = tDAO.getTeacherByClassAndSubject(classes, subject, id);
+
+                if (checkTeacher) {
+                    session.setAttribute("isPower", id + "");
+
+                } else {
+                    session.setAttribute("isPower", "false");
+                }
             } else {
                 session.setAttribute("isPower", "false");
             }
+
             response.sendRedirect("/AddScore");
-        }else if(request.getParameter("btn-save") != null){
-            String [] txtValues = request.getParameter("txt_values").split(" ");
+        } else if (request.getParameter("btn-save") != null) {
+            String[] txtValues = request.getParameter("txt_values").split(" ");
             String classes = txtValues[0];
             int subject_id = Integer.parseInt(txtValues[1]);
             int semester_id = Integer.parseInt(txtValues[2]);
-            
+
             TeacherDAO tDAO = new TeacherDAO();
             ResultSet rs = tDAO.getStudent(classes, subject_id, semester_id);
             try {
-                while(rs.next()){
-                    int student_id = rs.getInt("student_id"); 
-                    if(request.getParameter(student_id + " scoreMouth") != null){
-                        tDAO.updateScoreById(student_id, Float.parseFloat(request.getParameter(student_id + " scoreMouth")), Float.parseFloat(request.getParameter(student_id + " scoreShortExam")), Float.parseFloat(request.getParameter(student_id + " scoreMidSemester")), Float.parseFloat(request.getParameter(student_id + " scoreSemester")));
+                while (rs.next()) {
+                    int student_id = rs.getInt("student_id");
+
+                    if (request.getParameter(student_id + " scoreMouth") != null) {
+                        String scoreMouth = request.getParameter(student_id + " scoreMouth");
+                        String scoreShortExam = request.getParameter(student_id + " scoreShortExam");
+                        String scoreMidSemester = request.getParameter(student_id + " scoreMidSemester");
+                        String scoreSemester = request.getParameter(student_id + " scoreSemester");
+                        Float gpa = Float.parseFloat(request.getParameter(student_id + " gpa"));
+
+                        tDAO.updateScoreById(student_id, scoreMouth, scoreShortExam, scoreMidSemester, scoreSemester, gpa);
                     }
                 }
             } catch (SQLException ex) {
                 Logger.getLogger(AddScore.class.getName()).log(Level.SEVERE, null, ex);
             }
-            
+
             response.sendRedirect("/AddScore");
         }
     }
